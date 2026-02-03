@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zaproszenie na wesele — Ania & Bartek</title>
+  <meta name="description" content="Zaproszenie na wesele — szczegóły, harmonogram i RSVP." />
+
+  <!-- Eleganckie fonty jak w wedding templates -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Wix-like: ivory / taupe / charcoal */
+      --bg: #fbfaf7;
+      --paper: #ffffff;
+      --text: #1f1f1f;
+      --muted: rgba(31,31,31,.62);
+      --line: rgba(31,31,31,.14);
+
+      --accent: #2a2a2a;       /* grafit */
+      --accentSoft: rgba(31,31,31,.06);
+
+      --radius: 18px;
+      --max: 1040px;
+      --shadow: 0 18px 45px rgba(0,0,0,.08);
+
+      --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+      --sans: "Montserrat", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1100px 700px at 10% -10%, rgba(0,0,0,.05), transparent 60%),
+        radial-gradient(900px 600px at 100% 0%, rgba(0,0,0,.035), transparent 60%),
+        var(--bg);
+      line-height:1.6;
+      letter-spacing: .1px;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width:var(--max); margin:0 auto; padding: 0 22px; }
+
+    /* NAV: minimalistyczny, jak w Wix template */
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(251,250,247,.76);
+      border-bottom: 1px solid rgba(31,31,31,.10);
+    }
+    .nav-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+    }
+    .brand{
+      display:flex;
+      align-items:baseline;
+      gap: 10px;
+      font-family: var(--serif);
+      letter-spacing: .6px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .brand .thin{ font-weight: 400; opacity: .8; }
+    .links{
+      display:flex;
+      gap: 16px;
+      align-items:center;
+      flex-wrap:wrap;
+      font-size: 12px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .links a{ padding: 8px 10px; border-radius: 999px; }
+    .links a:hover{ background: var(--accentSoft); color: var(--text); }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 11px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      cursor:pointer;
+      font: 500 12px/1 var(--sans);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      white-space:nowrap;
+      transition: transform .06s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+    }
+    .btn:hover{ background: var(--accentSoft); border-color: rgba(31,31,31,.20); }
+    .btn:active{ transform: translateY(1px); }
+    .btn.primary{
+      background: var(--text);
+      color: #fff;
+      border-color: var(--text);
+    }
+    .btn.primary:hover{ background: rgba(31,31,31,.92); }
+
+    /* HERO pełna szerokość */
+    .hero{
+      min-height: 84vh;
+      display:flex;
+      align-items:flex-end;
+      position: relative;
+      overflow:hidden;
+      border-bottom: 1px solid rgba(31,31,31,.10);
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.20) 0%, rgba(0,0,0,.42) 55%, rgba(0,0,0,.55) 100%),
+        var(--hero-image);
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.02);
+    }
+    .hero::after{
+      /* delikatny "film grain" */
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.08), transparent 55%);
+      pointer-events:none;
+      mix-blend-mode: overlay;
+      opacity:.35;
+    }
+    .hero-inner{
+      position:relative;
+      width:100%;
+      padding: 56px 0 46px;
+    }
+    .hero-box{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 22px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      color:#fff;
+      text-align:center;
+    }
+    .hero-kicker{
+      font: 500 12px/1 var(--sans);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      opacity: .92;
+    }
+    .hero-title{
+      margin:0;
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1.05;
+      letter-spacing: .02em;
+    }
+    .hero-date{
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(18px, 2.4vw, 24px);
+      opacity: .95;
+    }
+    .hero-actions{
+      display:flex;
+      gap: 10px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top: 8px;
+    }
+    .scroll{
+      margin-top: 14px;
+      display:inline-flex;
+      gap: 10px;
+      align-items:center;
+      justify-content:center;
+      color: rgba(255,255,255,.85);
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      opacity: .9;
+    }
+    .scroll .chev{
+      width: 30px; height: 30px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.35);
+      display:grid; place-items:center;
+    }
+
+    /* SEKCJE jak w Wix: dużo oddechu + cienkie separatory */
+    .section{
+      padding: 68px 0;
+    }
+    .section + .section{
+      border-top: 1px solid rgba(31,31,31,.10);
+    }
+    .section h2{
+      margin: 0 0 18px;
+      font-family: var(--serif);
+      font-weight: 600;
+      letter-spacing: .02em;
+      font-size: 34px;
+      text-align:center;
+    }
+    .subtitle{
+      margin: 0 auto 36px;
+      max-width: 70ch;
+      color: var(--muted);
+      text-align:center;
+      font-size: 14px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+    .col-12{ grid-column: span 12; }
+    .col-8{ grid-column: span 8; }
+    .col-6{ grid-column: span 6; }
+    .col-4{ grid-column: span 4; }
+
+    .card{
+      background: var(--paper);
+      border: 1px solid rgba(31,31,31,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .block{ padding: 22px; }
+    .block h3{
+      margin: 0 0 10px;
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: .02em;
+    }
+    .hint{ margin:0; color: var(--muted); font-size: 14px; }
+
+    .meta{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tag{
+      border: 1px solid rgba(31,31,31,.14);
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.65);
+    }
+
+    /* Timeline: bardzo minimalistyczna */
+    .timeline{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap: 12px;
+    }
+    .timeline li{
+      display:grid;
+      grid-template-columns: 92px 1fr;
+      gap: 14px;
+      align-items:start;
+      padding: 14px 16px;
+      border: 1px solid rgba(31,31,31,.12);
+      border-radius: 16px;
+      background: rgba(255,255,255,.7);
+    }
+    .time{
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: .02em;
+    }
+    .desc .t{
+      font-weight: 600;
+      letter-spacing: .02em;
+    }
+    .desc .s{
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Countdown w stylu “wix”: cienkie ramki, serify */
+    .countdown{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-top: 12px;
+    }
+    .pill{
+      flex:1;
+      min-width: 110px;
+      padding: 14px 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(31,31,31,.12);
+      background: rgba(255,255,255,.72);
+      text-align:center;
+    }
+    .pill .num{
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 26px;
+      line-height:1.1;
+    }
+    .pill .lbl{
+      margin-top: 6px;
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Formularz: czysty, bez „kolorowych” focusów */
+    .form{ display:grid; gap: 14px; }
+    .row{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    label{
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display:block;
+      margin: 0 0 8px;
+    }
+    input, select, textarea{
+      width:100%;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(31,31,31,.16);
+      background: rgba(255,255,255,.75);
+      font: 400 14px/1.4 var(--sans);
+      outline:none;
+      color: var(--text);
+    }
+    textarea{ min-height: 110px; resize:vertical; }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(31,31,31,.36);
+      box-shadow: 0 0 0 6px rgba(31,31,31,.08);
+    }
+
+    .success, .danger{
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(31,31,31,.14);
+      background: rgba(31,31,31,.05);
+      color: var(--text);
+      display:none;
+      font-size: 14px;
+    }
+    .danger{
+      border-color: rgba(185,28,28,.22);
+      background: rgba(185,28,28,.06);
+    }
+
+    footer{
+      padding: 44px 0 54px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      text-align:center;
+      border-top: 1px solid rgba(31,31,31,.10);
+    }
+
+    @media (max-width: 900px){
+      .col-8{ grid-column: span 12; }
+      .col-6{ grid-column: span 12; }
+      .col-4{ grid-column: span 12; }
+      .links{ display:none; }
+      .row{ grid-template-columns: 1fr; }
+      .hero-inner{ padding: 54px 0 42px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <span id="brandCouple">Ania & Bartek</span>
+        <span class="thin">• wedding</span>
+      </div>
+
+      <div class="links" aria-label="Nawigacja">
+        <a href="#szczegoly">Szczegóły</a>
+        <a href="#plan">Plan</a>
+        <a href="#dojazd">Dojazd</a>
+        <a href="#faq">FAQ</a>
+        <a href="#rsvp">RSVP</a>
+      </div>
+
+      <a class="btn primary" href="#rsvp">Potwierdź</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero" id="top" aria-label="Zaproszenie">
+    <div class="hero-inner">
+      <div class="hero-box">
+        <div class="hero-kicker">Save the date</div>
+        <h1 class="hero-title" id="heroCouple">Ania & Bartek</h1>
+        <div class="hero-date" id="weddingDateLabel">14 czerwca 2026</div>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="#rsvp">RSVP</a>
+          <a class="btn" href="#szczegoly">Szczegóły</a>
+          <button class="btn" id="copyLinkBtn" type="button">Kopiuj link</button>
+        </div>
+
+        <a class="scroll" href="#szczegoly" aria-label="Przewiń">
+          <span class="chev">↓</span> przewiń
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- SZCZEGÓŁY -->
+    <section class="section" id="szczegoly">
+      <h2>Szczegóły</h2>
+      <p class="subtitle">
+        Będzie nam ogromnie miło, jeśli spędzisz z nami ten dzień. Poniżej znajdziesz wszystkie informacje, plan oraz formularz RSVP.
+      </p>
+
+      <div class="grid">
+        <div class="card block col-6">
+          <h3>Data i godzina</h3>
+          <div class="meta">
+            <span class="tag"><strong id="tagDate">14.06.2026</strong></span>
+            <span class="tag">Ceremonia: <strong id="tagCeremony">15:00</strong></span>
+            <span class="tag">Wesele: <strong id="tagParty">17:00</strong></span>
+          </div>
+          <p class="hint" style="margin-top:12px;">Prosimy o przybycie ~15 minut wcześniej.</p>
+        </div>
+
+        <div class="card block col-6">
+          <h3>Miejsce</h3>
+          <p class="hint">
+            <strong id="locName">Dom Weselny “Magnolia”</strong><br />
+            <span id="locAddr">ul. Kwiatowa 12, 00-000 Miasto</span>
+          </p>
+
+          <div class="countdown" aria-live="polite">
+            <div class="pill"><div class="num" id="cdDays">—</div><div class="lbl">dni</div></div>
+            <div class="pill"><div class="num" id="cdHours">—</div><div class="lbl">godz</div></div>
+            <div class="pill"><div class="num" id="cdMins">—</div><div class="lbl">min</div></div>
+            <div class="pill"><div class="num" id="cdSecs">—</div><div class="lbl">sek</div></div>
+          </div>
+        </div>
+
+        <div class="card block col-4">
+          <h3>Prezenty</h3>
+          <p class="hint">
+            Największym prezentem będzie Wasza obecność. Jeśli jednak chcecie coś podarować — ucieszymy się z książek, wina albo wsparcia naszej podróży poślubnej.
+          </p>
+        </div>
+
+        <div class="card block col-4">
+          <h3>Menu</h3>
+          <p class="hint">W RSVP możesz zaznaczyć dietę (wegetariańska, bez glutenu itp.).</p>
+        </div>
+
+        <div class="card block col-4">
+          <h3>Kontakt</h3>
+          <p class="hint">
+            <span id="contactA">Ania: +48 111 111 111</span><br />
+            <span id="contactB">Bartek: +48 222 222 222</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLAN DNIA -->
+    <section class="section" id="plan">
+      <h2>Plan dnia</h2>
+      <p class="subtitle">Prosty plan, żeby każdy czuł się pewnie i na czas trafił w odpowiednie miejsce.</p>
+
+      <div class="grid">
+        <div class="card block col-8">
+          <ul class="timeline" id="timeline">
+            <li><div class="time">15:00</div><div class="desc"><div class="t">Ceremonia</div><div class="s">Kościół / USC — miejsce do uzupełnienia</div></div></li>
+            <li><div class="time">16:30</div><div class="desc"><div class="t">Przejazd</div><div class="s">W kierunku sali weselnej</div></div></li>
+            <li><div class="time">17:00</div><div class="desc"><div class="t">Powitanie i obiad</div><div class="s">Pierwszy toast i start imprezy</div></div></li>
+            <li><div class="time">19:30</div><div class="desc"><div class="t">Tort</div><div class="s">Słodki moment</div></div></li>
+            <li><div class="time">00:00</div><div class="desc"><div class="t">Niespodzianka</div><div class="s">Zostawiamy trochę magii na później 🙂</div></div></li>
+          </ul>
+        </div>
+
+        <div class="card block col-4">
+          <h3>Dodaj do kalendarza</h3>
+          <p class="hint">Kliknij, aby pobrać plik .ics.</p>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn primary" type="button" id="icsBtn">Pobierz .ics</button>
+            <a class="btn" href="#rsvp">RSVP</a>
+          </div>
+          <p class="hint" style="margin-top:14px;">Dress code: <strong>elegancko, swobodnie</strong> • Dzieci: <strong>mile widziane</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOJAZD -->
+    <section class="section" id="dojazd">
+      <h2>Dojazd</h2>
+      <p class="subtitle">Kliknij w mapę i zaplanuj trasę — to najprostsza opcja dla gości.</p>
+
+      <div class="grid">
+        <div class="card block col-6">
+          <h3>Adres sali</h3>
+          <p class="hint">
+            <strong id="locName2">Dom Weselny “Magnolia”</strong><br />
+            <span id="locAddr2">ul. Kwiatowa 12, 00-000 Miasto</span>
+          </p>
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn" target="_blank" rel="noopener" id="mapsBtn" href="https://www.google.com/maps?q=ul.+Kwiatowa+12,+Miasto">Otwórz mapę</a>
+            <a class="btn" href="#rsvp">Zgłoś transport</a>
+          </div>
+          <p class="hint" style="margin-top:12px;">Parking jest dostępny przy sali.</p>
+        </div>
+
+        <div class="card block col-6">
+          <h3>Transport / nocleg</h3>
+          <p class="hint">
+            Jeśli potrzebujesz transportu z ceremonii na salę — zaznacz to w RSVP. Jeśli przyjeżdżasz z innego miasta, daj znać — podpowiemy nocleg i logistykę.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <h2>FAQ</h2>
+      <p class="subtitle">Najczęstsze pytania — żeby oszczędzić sobie dziesiątek wiadomości 🙂</p>
+
+      <div class="grid">
+        <div class="card block col-6">
+          <h3>Osoba towarzysząca?</h3>
+          <p class="hint">Jeśli zaproszenie jest „z osobą towarzyszącą” — oczywiście. Wpisz to w RSVP.</p>
+        </div>
+        <div class="card block col-6">
+          <h3>Do kiedy potwierdzić obecność?</h3>
+          <p class="hint">Najlepiej do <strong id="rsvpDeadline">31 maja 2026</strong>.</p>
+        </div>
+        <div class="card block col-6">
+          <h3>Dzieci?</h3>
+          <p class="hint">Tak, dzieci są mile widziane. Daj znać ile osób będzie w RSVP.</p>
+        </div>
+        <div class="card block col-6">
+          <h3>Preferencje żywieniowe?</h3>
+          <p class="hint">Zaznacz dietę w RSVP i dopisz szczegóły w uwagach.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section class="section" id="rsvp">
+      <h2>RSVP</h2>
+      <p class="subtitle">Potwierdź obecność — to nam bardzo pomaga w organizacji.</p>
+
+      <div class="grid">
+        <div class="card block col-8">
+          <div class="success" id="okBox">Dziękujemy! Twoje zgłoszenie zostało zapisane w tej przeglądarce.</div>
+          <div class="danger" id="errBox">Ups — sprawdź pola formularza i spróbuj ponownie.</div>
+
+          <form class="form" id="rsvpForm" novalidate>
+            <div class="row">
+              <div>
+                <label for="name">Imię i nazwisko *</label>
+                <input id="name" name="name" placeholder="np. Jan Kowalski" required />
+              </div>
+              <div>
+                <label for="attendance">Obecność *</label>
+                <select id="attendance" name="attendance" required>
+                  <option value="">Wybierz…</option>
+                  <option value="tak">Tak, będę</option>
+                  <option value="nie">Niestety nie mogę</option>
+                  <option value="moze">Jeszcze nie wiem</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="guests">Liczba osób *</label>
+                <input id="guests" name="guests" type="number" min="1" max="10" value="1" required />
+              </div>
+              <div>
+                <label for="diet">Dieta</label>
+                <select id="diet" name="diet">
+                  <option value="">Brak / standard</option>
+                  <option value="weget">Wegetariańska</option>
+                  <option value="wege">Wegańska</option>
+                  <option value="bezglut">Bez glutenu</option>
+                  <option value="bezlak">Bez laktozy</option>
+                  <option value="inna">Inna (opis w uwagach)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="transport">Transport</label>
+                <select id="transport" name="transport">
+                  <option value="">Nie dotyczy</option>
+                  <option value="potrzebuje">Potrzebuję transportu</option>
+                  <option value="oferuje">Mogę zabrać kogoś</option>
+                </select>
+              </div>
+              <div>
+                <label for="phone">Telefon</label>
+                <input id="phone" name="phone" placeholder="+48 …" />
+              </div>
+            </div>
+
+            <div>
+              <label for="notes">Uwagi</label>
+              <textarea id="notes" name="notes" placeholder="np. alergie, szczegóły diety, nocleg, osoba towarzysząca…"></textarea>
+              <p class="hint" style="margin-top:10px;">
+                W tej wersji dane zapisują się lokalnie (w Twojej przeglądarce). Jeśli chcesz, podepnę wysyłkę do Google Sheets / Forms / e-mail.
+              </p>
+            </div>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="btn primary" type="submit">Zapisz RSVP</button>
+              <button class="btn" type="button" id="exportBtn">Eksport JSON</button>
+              <button class="btn" type="button" id="clearBtn">Wyczyść</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card block col-4">
+          <h3>Udostępnianie</h3>
+          <p class="hint">
+            1) Wrzuć plik <strong>index.html</strong> na hosting (GitHub Pages / Netlify).<br />
+            2) Skopiuj link i wyślij gościom.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> <span id="footCouple">Ania & Bartek</span> • do zobaczenia
+    </footer>
+  </main>
+
+  <script>
+    // ======= KONFIG (ZMIENIASZ TYLKO TU) =======
+    const HERO_IMAGE = "photo2.jpg";
+
+    const CONFIG = {
+      couple: "Marta & Volodia",
+      weddingDateISO: "2026-06-14T15:00:00",
+      weddingDateLabel: "14 lutego 2026",
+      tagDate: "14.02.2026",
+      ceremonyTime: "15:30",
+      partyTime: "17:00",
+      rsvpDeadline: "31 maja 2026",
+      locationName: "Dom Weselny “Magnolia”",
+      locationAddress: "ul. Kwiatowa 12, 00-000 Miasto",
+      mapsUrl: "https://www.google.com/maps?q=ul.+Kwiatowa+12,+Miasto",
+      contactA: "Ania: +48 111 111 111",
+      contactB: "Bartek: +48 222 222 222",
+    };
+
+    // hero image var
+    document.documentElement.style.setProperty("--hero-image", `url("${HERO_IMAGE}")`);
+
+    const $ = (sel) => document.querySelector(sel);
+
+    // fill text
+    document.title = `Zaproszenie na wesele — ${CONFIG.couple}`;
+    $("#brandCouple").textContent = CONFIG.couple;
+    $("#heroCouple").textContent = CONFIG.couple;
+    $("#footCouple").textContent = CONFIG.couple;
+
+    $("#weddingDateLabel").textContent = CONFIG.weddingDateLabel;
+    $("#tagDate").textContent = CONFIG.tagDate;
+    $("#tagCeremony").textContent = CONFIG.ceremonyTime;
+    $("#tagParty").textContent = CONFIG.partyTime;
+    $("#rsvpDeadline").textContent = CONFIG.rsvpDeadline;
+
+    $("#locName").textContent = CONFIG.locationName;
+    $("#locAddr").textContent = CONFIG.locationAddress;
+    $("#locName2").textContent = CONFIG.locationName;
+    $("#locAddr2").textContent = CONFIG.locationAddress;
+
+    $("#contactA").textContent = CONFIG.contactA;
+    $("#contactB").textContent = CONFIG.contactB;
+
+    $("#mapsBtn").href = CONFIG.mapsUrl;
+
+    // footer year
+    $("#year").textContent = new Date().getFullYear();
+
+    // copy link
+    $("#copyLinkBtn").addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText(location.href);
+        alert("Link skopiowany ✅");
+      }catch(e){
+        alert("Nie udało się skopiować. Skopiuj ręcznie z paska adresu.");
+      }
+    });
+
+    // ===== COUNTDOWN =====
+    const target = new Date(CONFIG.weddingDateISO).getTime();
+    function tick(){
+      const now = Date.now();
+      let diff = Math.max(0, target - now);
+
+      const days = Math.floor(diff / (1000*60*60*24));
+      diff -= days * (1000*60*60*24);
+      const hours = Math.floor(diff / (1000*60*60));
+      diff -= hours * (1000*60*60);
+      const mins = Math.floor(diff / (1000*60));
+      diff -= mins * (1000*60);
+      const secs = Math.floor(diff / 1000);
+
+      $("#cdDays").textContent = days;
+      $("#cdHours").textContent = String(hours).padStart(2,"0");
+      $("#cdMins").textContent = String(mins).padStart(2,"0");
+      $("#cdSecs").textContent = String(secs).padStart(2,"0");
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    // ===== RSVP (LocalStorage) =====
+    const KEY = "wedding_rsvp_entries_v1";
+    function loadEntries(){
+      try{ return JSON.parse(localStorage.getItem(KEY) || "[]"); }
+      catch(e){ return []; }
+    }
+    function saveEntries(entries){
+      localStorage.setItem(KEY, JSON.stringify(entries, null, 2));
+    }
+
+    const okBox = $("#okBox");
+    const errBox = $("#errBox");
+
+    $("#rsvpForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      okBox.style.display = "none";
+      errBox.style.display = "none";
+
+      const form = e.currentTarget;
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      const nameOk = (data.name || "").trim().length >= 3;
+      const attendanceOk = ["tak","nie","moze"].includes(data.attendance);
+      const guestsNum = Number(data.guests);
+      const guestsOk = Number.isFinite(guestsNum) && guestsNum >= 1 && guestsNum <= 10;
+
+      if(!nameOk || !attendanceOk || !guestsOk){
+        errBox.style.display = "block";
+        return;
+      }
+
+      const entry = { ...data, guests: guestsNum, createdAt: new Date().toISOString() };
+      const entries = loadEntries();
+      entries.push(entry);
+      saveEntries(entries);
+
+      okBox.style.display = "block";
+      form.reset();
+      $("#guests").value = 1;
+    });
+
+    $("#exportBtn").addEventListener("click", () => {
+      const entries = loadEntries();
+      const blob = new Blob([JSON.stringify(entries, null, 2)], {type:"application/json"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "rsvp-zgloszenia.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    $("#clearBtn").addEventListener("click", () => {
+      if(confirm("Na pewno usunąć wszystkie zapisane zgłoszenia z tej przeglądarki?")){
+        localStorage.removeItem(KEY);
+        alert("Usunięto ✅");
+      }
+    });
+
+    // ===== ICS generator =====
+    $("#icsBtn").addEventListener("click", () => {
+      const start = new Date(CONFIG.weddingDateISO);
+      const end = new Date(start.getTime() + 6 * 60 * 60 * 1000);
+
+      function toICSDate(d){
+        const pad = (n)=>String(n).padStart(2,"0");
+        return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}`;
+      }
+
+      const ics =
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Wedding Invite//PL//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:${crypto?.randomUUID?.() || ("uid-"+Date.now())}
+DTSTAMP:${toICSDate(new Date())}
+DTSTART:${toICSDate(start)}
+DTEND:${toICSDate(end)}
+SUMMARY:${CONFIG.couple} — Wesele
+LOCATION:${CONFIG.locationName}, ${CONFIG.locationAddress}
+DESCRIPTION:Zaproszenie na wesele. Szczegóły na stronie: ${location.href}
+END:VEVENT
+END:VCALENDAR`;
+
+      const blob = new Blob([ics], {type:"text/calendar"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "wesele.ics";
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>

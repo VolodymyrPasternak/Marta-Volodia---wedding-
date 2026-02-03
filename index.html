@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zaproszenie na wesele — Marta & Volodia</title>
+  <meta name="description" content="Zaproszenie na wesele — szczegóły i harmonogram." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #fbfaf7;
+      --paper: #ffffff;
+      --text: #1f1f1f;
+      --muted: rgba(31,31,31,.62);
+      --line: rgba(31,31,31,.14);
+
+      --accent: #2a2a2a;
+      --accentSoft: rgba(31,31,31,.06);
+
+      --radius: 18px;
+      --max: 1040px;
+      --shadow: 0 18px 45px rgba(0,0,0,.08);
+
+      --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+      --sans: "Montserrat", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    html{ scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background: var(--bg);
+      line-height:1.6;
+      letter-spacing: .1px;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width:var(--max); margin:0 auto; padding: 0 22px; }
+    
+    /* HEADER (logo+nav) */
+    header.site-header{
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(251,250,247,.76);
+      border-bottom: 1px solid rgba(31,31,31,.10);
+    }
+    .nav-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+    }
+    .brand{
+      display:flex;
+      align-items:baseline;
+      gap: 10px;
+      font-family: var(--serif);
+      letter-spacing: .6px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .brand .thin{ font-weight: 400; opacity: .8; }
+
+    .links{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      flex-wrap:wrap;
+      font-size: 12px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .links a{ padding: 8px 10px; border-radius: 999px; }
+    .links a:hover{ background: var(--accentSoft); color: var(--text); }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 11px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      cursor:pointer;
+      font: 500 12px/1 var(--sans);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      white-space:nowrap;
+      transition: transform .06s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+    }
+    .btn:hover{ background: var(--accentSoft); border-color: rgba(31,31,31,.20); }
+    .btn:active{ transform: translateY(1px); }
+    .btn.primary{
+      background: var(--text);
+      color: #fff;
+      border-color: var(--text);
+    }
+    .btn.primary:hover{ background: rgba(31,31,31,.92); }
+
+    /* HERO as SECTION (inside MAIN) */
+    section.hero{
+      min-height: 86vh;
+      display:flex;
+      align-items:center;
+      position: relative;
+      overflow:hidden;
+      border-bottom: 1px solid rgba(31,31,31,.10);
+    }
+    section.hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.20) 0%, rgba(0,0,0,.42) 55%, rgba(0,0,0,.55) 100%),
+        var(--hero-image);
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.02);
+    }
+    section.hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.08), transparent 55%);
+      pointer-events:none;
+      mix-blend-mode: overlay;
+      opacity:.35;
+    }
+    .hero-inner{
+      position:relative;
+      width:100%;
+      padding: 56px 0 46px;
+    }
+    .hero-box{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 22px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      color:#fff;
+      text-align:center;
+    }
+    .hero-kicker{
+      font: 500 12px/1 var(--sans);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      opacity: .92;
+    }
+    .hero-title{
+      margin:0;
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1.05;
+      letter-spacing: .02em;
+    }
+    .hero-date{
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(18px, 2.4vw, 24px);
+      opacity: .95;
+    }
+
+    .countdown{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top: 12px;
+    }
+    .pill{
+      flex:0;
+      min-width: 110px;
+      padding: 14px 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.24);
+      background: rgba(255,255,255,.10);
+      text-align:center;
+      backdrop-filter: blur(6px);
+    }
+    .pill .num{
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 26px;
+      line-height:1.1;
+    }
+    .pill .lbl{
+      margin-top: 6px;
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.80);
+    }
+
+    .scroll{
+      margin-top: 14px;
+      display:inline-flex;
+      gap: 10px;
+      align-items:center;
+      justify-content:center;
+      color: rgba(255,255,255,.85);
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      opacity: .9;
+    }
+    .scroll .chev{
+      width: 30px; height: 30px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.35);
+      display:grid; place-items:center;
+    }
+
+    .section{ padding: 35px 0; }
+    .section + .section{ border-top: 1px solid rgba(31,31,31,.10); }
+    .section h2{
+      margin: 0 0 18px;
+      font-family: var(--serif);
+      font-weight: 600;
+      letter-spacing: .02em;
+      font-size: 34px;
+      text-align:center;
+    }
+    .subtitle{
+      margin: 0 auto;
+      max-width: 70ch;
+      color: var(--muted);
+      text-align:center;
+      font-size: 14px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+    .col-6{ grid-column: span 6; }
+    .col-8{ grid-column: span 8; }
+    .col-4{ grid-column: span 4; }
+
+    .card{
+      background: var(--paper);
+      border: 1px solid rgba(31,31,31,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .block{ padding: 22px; }
+    .block h3{
+      margin: 0 0 10px;
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: .02em;
+    }
+    .hint{ margin:0; color: var(--muted); font-size: 14px; }
+
+    .timeline{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap: 12px;
+    }
+    .timeline li{
+      display:grid;
+      grid-template-columns: 92px 1fr;
+      gap: 14px;
+      align-items:start;
+      padding: 14px 16px;
+      border: 1px solid rgba(31,31,31,.12);
+      border-radius: 16px;
+      background: rgba(255,255,255,.7);
+    }
+    .time{
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: .02em;
+    }
+    .desc .t{ font-weight: 600; letter-spacing: .02em; }
+    .desc .s{ margin-top: 2px; color: var(--muted); font-size: 14px; }
+
+    footer{
+      padding: 44px 0 54px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      text-align:center;
+      border-top: 1px solid rgba(31,31,31,.10);
+    }
+
+    @media (max-width: 900px){
+      .links{ display:none; }
+      .col-8, .col-6, .col-4{ grid-column: span 12; }
+      .hero-inner{ padding: 54px 0 42px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER: logo + menu -->
+  <header class="site-header">
+    <div class="nav-inner">
+      <a class="brand" href="#hero" aria-label="Do góry (Hero)">
+        <span data-config="couple">Marta & Volodia</span>
+        <span class="thin">• wedding</span>
+      </a>
+
+      <nav class="links" aria-label="Nawigacja">
+        <a href="#privitannya" data-translate="nav.greeting">Привітання</a>
+        <a href="#plan" data-translate="nav.plan">Plan dnia</a>
+        <a href="#lokacja" data-translate="nav.location">Lokacja</a>
+      </nav>
+
+      <button class="btn" id="langBtn" type="button" aria-label="Zmień język">
+        <span id="langLabel">UA</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN: wszystkie sekcje w środku -->
+  <main id="main" aria-label="Główna treść">
+    <!-- HERO jako osobna sekcja -->
+    <section class="hero" id="hero" aria-label="Hero">
+      <div class="hero-inner">
+        <div class="hero-box">
+          <div class="hero-kicker" data-translate="hero.kicker">Save the date</div>
+
+          <h1 class="hero-title" data-config="couple">Marta & Volodia</h1>
+          <div class="hero-date" data-config="weddingDateLabel">14 lutego 2026</div>
+
+          <div class="countdown" aria-live="polite">
+            <div class="pill"><div class="num" id="cdDays">—</div><div class="lbl" data-translate="countdown.days">dni</div></div>
+            <div class="pill"><div class="num" id="cdHours">—</div><div class="lbl" data-translate="countdown.hours">godz</div></div>
+            <div class="pill"><div class="num" id="cdMins">—</div><div class="lbl" data-translate="countdown.mins">min</div></div>
+            <div class="pill"><div class="num" id="cdSecs">—</div><div class="lbl" data-translate="countdown.secs">sek</div></div>
+          </div>
+
+          <a class="scroll" href="#privitannya" aria-label="Przewiń">
+            <span class="chev">↓</span> <span data-translate="hero.scroll">przewiń</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- POWITANIE -->
+      <section class="section" id="privitannya">
+        <h2 data-translate="greeting.title">Любі гості!</h2>
+        <p class="subtitle" data-translate="greeting.subtitle">
+          Один день цього року стане для нас особливим. Ми будемо щасливі провести його разом із вами.
+          Запрошуємо розділити з нами свято кохання та новий етап нашого життя.
+        </p>
+      </section>
+
+      <!-- LOKACJA -->
+      <section class="section" id="lokacja">
+        <h2 data-translate="location.title">Lokacja</h2>
+        <!-- <p class="subtitle" data-translate="location.subtitle">Kliknij i otwórz mapę Google — to najprostsza opcja.</p> -->
+
+        <div class="grid">
+          <div class="card block col-6">
+            <h3 data-translate="ceremony.title">Ceremonia</h3>
+            <p class="hint">
+              <strong data-config="ceremonyName">—</strong><br />
+              <span data-config="ceremonyAddress">—</span>
+            </p>
+            <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn" target="_blank" rel="noopener" id="mapsBtnC" href="#" data-translate="ceremony.openMap">Otwórz mapę</a>
+            </div>
+            <p class="hint" style="margin-top:12px;" data-translate="ceremony.hint">—</p>
+          </div>
+
+          <div class="card block col-6">
+            <h3 data-translate="location.placeTitle">Miejsce</h3>
+            <p class="hint">
+              <strong data-config="locationName">Willa Bankietowa i dom weselny - LasPapiernia</strong><br />
+              <span data-config="locationAddress">Rezydencja Nowy Orlean</span>
+            </p>
+            <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn" target="_blank" rel="noopener" id="mapsBtn" href="#" data-translate="location.openMap">Otwórz mapę</a>
+            </div>
+            <p class="hint" style="margin-top:12px;" data-translate="location.parking">Parking jest dostępny na miejscu.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PLAN DNIA -->
+      <section class="section" id="plan">
+        <h2 data-translate="plan.title">Plan dnia</h2>
+        <!-- <p class="subtitle" data-translate="plan.subtitle">Prosty plan, żeby każdy czuł się pewnie i na czas trafił w odpowiednie miejsce.</p> -->
+
+        <div class="grid">
+          <div class="card block col-8">
+            <ul class="timeline">
+              <li>
+                <div class="time">15:30</div>
+                <div class="desc">
+                  <div class="t" data-translate="plan.ceremony.title">Ceremonia</div>
+                  <div class="s" data-translate="plan.ceremony.desc">
+                    Kościół / USC — miejsce do uzupełnienia
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="time">17:00</div>
+                <div class="desc">
+                  <div class="t" data-translate="plan.transfer.title">Przejazd</div>
+                  <div class="s" data-translate="plan.transfer.desc">W kierunku sali weselnej</div>
+                </div>
+              </li>
+
+              <li>
+                <div class="time">18:00</div>
+                <div class="desc">
+                  <div class="t" data-translate="plan.welcome.title">Powitanie i obiad</div>
+                  <div class="s" data-translate="plan.welcome.desc">Pierwszy toast i start imprezy</div>
+                </div>
+              </li>
+
+              <li>
+                <div class="time">19:30</div>
+                <div class="desc">
+                  <div class="t" data-translate="plan.cake.title">Tort</div>
+                  <div class="s" data-translate="plan.cake.desc">Słodki moment</div>
+                </div>
+              </li>
+
+              <li>
+                <div class="time">00:00</div>
+                <div class="desc">
+                  <div class="t" data-translate="plan.surprise.title">Niespodzianka</div>
+                  <div class="s" data-translate="plan.surprise.desc">
+                    Zostawiamy trochę magii na później 🙂
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card block col-4">
+            <h3 data-translate="ics.title">Dodaj do kalendarza</h3>
+            <p class="hint" data-translate="ics.hint">Kliknij, aby pobrać plik .ics.</p>
+            <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="btn primary" type="button" id="icsBtn" data-translate="ics.button">Pobierz .ics</button>
+            </div>
+            <p class="hint" style="margin-top:14px;" data-translate-html="dress.html">
+              Dress code: <strong>elegancko, swobodnie</strong> • Dzieci: <strong>mile widziane</strong>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        © <span id="year"></span> <span data-config="couple">Marta & Volodia</span> • do zobaczenia
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    // ======= KONFIG (ZMIENIASZ TYLKO TU) =======
+    const HERO_IMAGE = "photo2.jpg";
+
+    const CONFIG = {
+      couple: "Marta & Volodia",
+      weddingDateISO: "2026-02-14T15:30:00",
+      weddingDateLabel: "14 lutego 2026",
+
+      locationName: "Willa Bankietowa i dom weselny - LasPapiernia, Rezydencja Nowy Orlean",
+      locationAddress: "Papiernia 4, 05-304 Papiernia",
+      mapsUrl: "https://maps.app.goo.gl/QsWWejKhQrP4dqcDA",
+
+      ceremonyName: "Parafia Greckokatolicka pw. Zaśnięcia Najświętszej Marii Panny",
+      ceremonyAddress: "Miodowa 16, 00-246 Warszawa",
+      mapsUrlC: "https://maps.app.goo.gl/5t5PT8mMVuDmZUDm8",
+    };
+
+    // Hero image var
+    document.documentElement.style.setProperty("--hero-image", `url("${HERO_IMAGE}")`);
+
+    const $ = (sel) => document.querySelector(sel);
+
+    // Fill config-bound text (by attribute, no ids)
+    function applyConfig() {
+      document.title = `Zaproszenie na wesele — ${CONFIG.couple}`;
+      document.querySelectorAll("[data-config]").forEach(el => {
+        const key = el.getAttribute("data-config");
+        if (key && CONFIG[key] != null) el.textContent = CONFIG[key];
+      });
+
+      // links
+      $("#mapsBtn").href = CONFIG.mapsUrl;
+      $("#mapsBtnC").href = CONFIG.mapsUrlC;
+      $("#year").textContent = new Date().getFullYear();
+    }
+    applyConfig();
+
+    // ===== COUNTDOWN =====
+    const target = new Date(CONFIG.weddingDateISO).getTime();
+    function tick(){
+      const now = Date.now();
+      let diff = Math.max(0, target - now);
+
+      const days = Math.floor(diff / (1000*60*60*24));
+      diff -= days * (1000*60*60*24);
+      const hours = Math.floor(diff / (1000*60*60));
+      diff -= hours * (1000*60*60);
+      const mins = Math.floor(diff / (1000*60));
+      diff -= mins * (1000*60);
+      const secs = Math.floor(diff / 1000);
+
+      $("#cdDays").textContent = days;
+      $("#cdHours").textContent = String(hours).padStart(2,"0");
+      $("#cdMins").textContent = String(mins).padStart(2,"0");
+      $("#cdSecs").textContent = String(secs).padStart(2,"0");
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    // ===== ICS generator =====
+    $("#icsBtn").addEventListener("click", () => {
+      const start = new Date(CONFIG.weddingDateISO);
+      const end = new Date(start.getTime() + 6 * 60 * 60 * 1000);
+
+      function toICSDate(d){
+        const pad = (n)=>String(n).padStart(2,"0");
+        return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}`;
+      }
+
+      const ics =
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Wedding Invite//PL//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:${crypto?.randomUUID?.() || ("uid-"+Date.now())}
+DTSTAMP:${toICSDate(new Date())}
+DTSTART:${toICSDate(start)}
+DTEND:${toICSDate(end)}
+SUMMARY:${CONFIG.couple} — Wesele
+LOCATION:${CONFIG.locationName}, ${CONFIG.locationAddress}
+DESCRIPTION:Zaproszenie na wesele. Szczegóły na stronie: ${location.href}
+END:VEVENT
+END:VCALENDAR`;
+
+      const blob = new Blob([ics], {type:"text/calendar"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "wesele.ics";
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // ===== TRANSLATIONS (by attribute, not id) =====
+    const STRINGS = {
+      ua: {
+        "nav.greeting": "Привітання",
+        "nav.plan": "План дня",
+        "nav.location": "Локації",
+
+        "hero.kicker": "Save the date",
+        "hero.scroll": "прокрути",
+
+        "countdown.days": "днів",
+        "countdown.hours": "год",
+        "countdown.mins": "хв",
+        "countdown.secs": "сек",
+
+        "greeting.title": "Любі гості!",
+        "greeting.subtitle":
+          "Один день цього року стане для нас особливим. Ми будемо щасливі провести його разом із вами. Запрошуємо розділити з нами свято кохання та новий етап нашого життя.",
+
+        "location.title": "Локації",
+        "location.subtitle": "Натисни та відкрий Google Maps — так найзручніше.",
+        "location.placeTitle": "Бенкетна зала",
+        "location.openMap": "Відкрити мапу",
+        "location.parking": "Паркінг доступний на місці.",
+
+        "ceremony.title": "Вінчання",
+        "ceremony.openMap": "Відкрити мапу",
+        "ceremony.hint": "Можна припаркуватися на громадській парковці поруч із церквою. (по суботах безкоштовно)",
+
+        "plan.title": "План дня",
+        "plan.subtitle": "Простий план, щоб усім було зручно та зрозуміло.",
+
+        "plan.ceremony.title": "Вінчання",
+        "plan.ceremony.desc": "Прохання прибути за 15 хвилин до початку.",
+
+        "plan.transfer.title": "Переїзд",
+        "plan.transfer.desc": "У напрямку весільної зали",
+
+        "plan.welcome.title": "Зустріч та обід",
+        "plan.welcome.desc": "Перший тост та початок святкування",
+
+        "plan.cake.title": "Торт",
+        "plan.cake.desc": "Солодка мить",
+
+        "plan.surprise.title": "Сюрприз",
+        "plan.surprise.desc": "Трохи магії залишимо на пізніше 🙂",
+
+        "ics.title": "Додати в календар",
+        "ics.hint": "Натисни, щоб завантажити файл .ics.",
+        "ics.button": "Завантажити .ics",
+
+        "dress.html": 'Дрес-код: <strong>елегантно, невимушено</strong> • Діти: <strong>вітаються</strong>',
+      },
+      pl: {
+        "nav.greeting": "Powitanie",
+        "nav.plan": "Plan dnia",
+        "nav.location": "Lokalizacje",
+
+        "hero.kicker": "Save the date",
+        "hero.scroll": "przewiń",
+
+        "countdown.days": "dni",
+        "countdown.hours": "godz",
+        "countdown.mins": "min",
+        "countdown.secs": "sek",
+
+        "greeting.title": "Drodzy Goście!",
+        "greeting.subtitle":
+          "Jeden dzień w tym roku będzie dla nas wyjątkowy. Będziemy szczęśliwi spędzić go razem z Wami. Zapraszamy, abyście dzielili z nami święto miłości i nowy etap naszego życia.",
+
+        "location.title": "Lokalizacje",
+        "location.subtitle": "Kliknij i otwórz mapę Google — to najprostsza opcja.",
+        "location.placeTitle": "Sala bankietowa",
+        "location.openMap": "Otwórz mapę",
+        "location.parking": "Parking jest dostępny na miejscu.",
+
+        "ceremony.title": "Ślub",
+        "ceremony.openMap": "Otwórz mapę",
+        "ceremony.hint": "Można zaparkować na ogólnodostępnym parkingu tuż obok cerkwi. (w soboty bezpłatnie)",
+
+        "plan.title": "Plan dnia",
+        "plan.subtitle": "Prosty plan, żeby każdy czuł się pewnie i na czas trafił w odpowiednie miejsce.",
+
+        "plan.ceremony.title": "Ślub",
+        "plan.ceremony.desc": "Prosimy o przybycie 15 minut przed rozpoczęciem.",
+
+        "plan.transfer.title": "Przejazd",
+        "plan.transfer.desc": "W kierunku sali weselnej",
+
+        "plan.welcome.title": "Powitanie i obiad",
+        "plan.welcome.desc": "Pierwszy toast i start imprezy",
+
+        "plan.cake.title": "Tort",
+        "plan.cake.desc": "Słodki moment",
+
+        "plan.surprise.title": "Niespodzianka",
+        "plan.surprise.desc": "Zostawiamy trochę magii na później 🙂",
+
+        "ics.title": "Dodaj do kalendarza",
+        "ics.hint": "Kliknij, aby pobrać plik .ics.",
+        "ics.button": "Pobierz .ics",
+
+        "dress.html": 'Dress code: <strong>elegancko, swobodnie</strong> • Dzieci: <strong>mile widziane</strong>',
+      }
+    };
+
+    const LANG_KEY = "wedding_lang_v1";
+    let lang = (localStorage.getItem(LANG_KEY) || "ua").toLowerCase();
+    if(!STRINGS[lang]) lang = "ua";
+
+    function applyTranslations(nextLang){
+      lang = nextLang;
+      localStorage.setItem(LANG_KEY, lang);
+
+      $("#langLabel").textContent = lang.toUpperCase();
+      document.documentElement.lang = (lang === "ua" ? "uk" : "pl");
+
+      // plain text translations
+      document.querySelectorAll("[data-translate]").forEach(el => {
+        const key = el.getAttribute("data-translate");
+        const value = STRINGS[lang][key];
+        if (value != null) el.textContent = value;
+      });
+
+      // html translations (when needed)
+      document.querySelectorAll("[data-translate-html]").forEach(el => {
+        const key = el.getAttribute("data-translate-html");
+        const value = STRINGS[lang][key];
+        if (value != null) el.innerHTML = value;
+      });
+    }
+
+    applyTranslations(lang);
+
+    $("#langBtn").addEventListener("click", () => {
+      applyTranslations(lang === "ua" ? "pl" : "ua");
+    });
+  </script>
+</body>
+</html>
